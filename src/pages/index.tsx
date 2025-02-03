@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import TransactionExecutor from "./components/TransactionExecutor";
 
 const Home: NextPage = () => {
   const { isConnected } = useAccount();
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
       <main className="text-center">
         <div className="relative w-64 h-64 mb-4">
           <Image
-            src="/images/pik.png" // Correct path
+            src="/images/pik.png"
             alt="Kaju Agent"
             layout="fill"
             objectFit="contain"
@@ -54,6 +55,13 @@ const Home: NextPage = () => {
           <div className="mt-4">
             <ConnectButton label="Connect Wallet" showBalance={false} />
           </div>
+
+          {/* Only show TransactionExecutor if wallet is connected */}
+          {isConnected && (
+            <div className="mt-8">
+              <TransactionExecutor />
+            </div>
+          )}
         </div>
       </main>
     </div>
